@@ -37,13 +37,6 @@ public class DialogController {
      * and due date submitted through the Add dialog, and processes the
      * data to add the item to the Data model.
      *
-     * TODO:
-     * This would benefit from form validation to ensure that the user at
-     * least provides an item description. Some to-do items could be as
-     * simple as "call mom" without requiring details about what the call
-     * will entail. In other scenarios, such as "call boss" or "call client"
-     * may require additional details (e.g., an agenda for the call).
-     *
      * @return The Item.
      */
     public Item processResults() {
