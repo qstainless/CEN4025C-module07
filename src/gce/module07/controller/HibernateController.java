@@ -31,7 +31,7 @@ public class HibernateController {
         Configuration configuration = new Configuration();
 
         // Defaults to src/hibernate.cfg.xml
-        configuration.configure().addAnnotatedClass(Item.class);
+        configuration.configure("/gce/module07/hibernate.cfg.xml").addAnnotatedClass(Item.class);
 
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
 
