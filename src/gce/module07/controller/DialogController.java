@@ -75,15 +75,37 @@ public class DialogController {
          the ListView. To do that, we first add the item to the database
          and Data model and then return it to the MainController
         */
+        Item newItem = createNewItem(itemDescription, itemDetails, itemDueDate);
+
+        insertNewItem(newItem);
+
+        return newItem;
+    }
+
+    /**
+     * Create a new to-do item with the data submitted by the user
+     *
+     * @param itemDescription The item description
+     * @param itemDetails The item details
+     * @param itemDueDate The item due date
+     * @return The newly created to-=do item
+     */
+    public Item createNewItem(String itemDescription, String itemDetails, LocalDate itemDueDate) {
         Item newItem = new Item();
 
         newItem.setItemDescription(itemDescription);
         newItem.setItemDetails(itemDetails);
         newItem.setItemDueDate(itemDueDate);
 
-        // Add the new item to the Data model and save to database
-        Data.getInstance().addItem(newItem);
-
         return newItem;
+    }
+
+    /**
+     * Add the new item to the Data model and save to database
+     *
+     * @param newItem The newly created to-do item
+     */
+    public void insertNewItem(Item newItem) {
+        Data.getInstance().addItem(newItem);
     }
 }
