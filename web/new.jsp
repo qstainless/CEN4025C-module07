@@ -27,9 +27,7 @@
 
                         <div id="container">
 
-                            <form method="post"
-                                  action="insert"
-                                  onsubmit='document.getElementById("create").disabled = true;'>
+                            <form action="InsertItem">
 
                                 <!-- Item Description -->
 
