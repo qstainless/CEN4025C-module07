@@ -4,6 +4,11 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+/**
+ * Item.java
+ *
+ * Model class to represent the Item entity
+ */
 @Entity
 @Table(name = "item")
 public class Item implements Serializable {
@@ -26,6 +31,22 @@ public class Item implements Serializable {
      * Model constructor
      */
     public Item() {
+    }
+
+    // Added overloading constructors for web ui
+    public Item(Integer id, String itemDescription, String itemDetails, LocalDate itemDueDate) {
+        super();
+        this.id = id;
+        this.itemDescription = itemDescription;
+        this.itemDetails = itemDetails;
+        this.itemDueDate = itemDueDate;
+    }
+
+    public Item(String itemDescription, String itemDetails, LocalDate itemDueDate) {
+        super();
+        this.itemDescription = itemDescription;
+        this.itemDetails = itemDetails;
+        this.itemDueDate = itemDueDate;
     }
 
     // Setters and getters
