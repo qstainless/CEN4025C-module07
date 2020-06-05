@@ -97,4 +97,12 @@ public class ItemDao {
             }
         }
     }
+
+    public static void deleteItemById(int itemId) {
+            Item item = session.get(Item.class, itemId);
+
+            if (item != null) {
+                deleteItem(item);
+            }
+    }
 }
