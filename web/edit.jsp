@@ -19,14 +19,16 @@
                 <div class="card border-primary">
 
                     <div class="card-header bg-primary py-0">
-                        <h3 class="text-white">Add new item</h3>
+                        <h3 class="text-white">Edit item</h3>
                     </div>
 
                     <div class="card-body p-2">
 
                         <div id="container">
 
-                            <form action="insert" method="post">
+                            <form action="update" method="post">
+
+                                <input type="hidden" name="id" value="<c:out value='${item.id}' />" />
 
                                 <!-- Item Description -->
 
@@ -42,6 +44,7 @@
                                                name="itemDescription"
                                                type="text"
                                                class="form-control"
+                                               value="<c:out value='${item.itemDescription}' />"
                                                maxlength="250"
                                                required
                                                tabindex="1"
@@ -67,7 +70,7 @@
                                                   rows="10"
                                                   cols="80"
                                                   tabindex="3"
-                                                  required></textarea>
+                                                  required><c:out value='${item.itemDetails}' /></textarea>
                                     </div> <!-- /.col -->
                                 </div> <!-- /.form-group -->
 
@@ -95,7 +98,8 @@
                                             $(function () {
                                                 $('#itemDueDate').datetimepicker({
                                                     format: 'YYYY-MM-DD',
-                                                    ignoreReadonly: true
+                                                    ignoreReadonly: true,
+                                                    defaultDate(moment(<c:out value='${item.itemDueDate}' />))
                                                 });
                                             });
                                         </script>
@@ -106,12 +110,12 @@
                                 <!-- Buttons -->
                                 <div class="form-group row">
 
-                                    <label for="create"
+                                    <label for="update"
                                            class="col-sm-3 col-form-label font-weight-normal">&nbsp;</label>
 
                                     <div class="col-sm-9">
-                                        <button id="create" type="submit" class="btn btn-sm btn-primary">Create</button>&nbsp;
-                                        <a href="index.jsp" class="btn btn-sm btn-warning">Cancel</a>
+                                        <button id="update" type="submit" class="btn btn-sm btn-primary">Update</button>&nbsp;
+                                        <a href="<%=request.getContextPath()%>/list" class="btn btn-sm btn-warning">Cancel</a>
                                     </div> <!-- /.col -->
 
                                 </div> <!-- /.form-group -->
