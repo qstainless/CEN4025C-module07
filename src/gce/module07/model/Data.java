@@ -15,10 +15,13 @@ public class Data {
     // Where the to-do items will be stored in memory
     private ObservableList<Item> items;
 
+    private final ItemDao itemDao;
+
     /**
      * Class constructor
      */
     private Data() {
+        itemDao = new ItemDaoImpl();
     }
 
     // Getters
@@ -33,7 +36,7 @@ public class Data {
     // Add a new to-do item to the database and the Data model
     public void addItem(Item item) {
         try {
-            ItemDao.insertItem(item);
+            itemDao.insertItem(item);
         } catch (Exception e) {
             System.out.println("Error deleting from database. Item not deleted.");
             e.printStackTrace();
@@ -53,7 +56,7 @@ public class Data {
         // Must use an observableArrayList to populate the GUI ListView
         items = FXCollections.observableArrayList();
 
-        List<Item> itemData = ItemDao.loadAllItems();
+        List<Item> itemData = itemDao.loadAllItems();
 
         // Add queried to-do items to the observableArrayList
         items.addAll(itemData);
@@ -66,7 +69,7 @@ public class Data {
      */
     public void deleteItem(Item item) {
         try {
-            ItemDao.deleteItem(item);
+            itemDao.deleteItem(item);
         } catch (Exception e) {
             System.out.println("Error deleting from database. Item not deleted.");
             e.printStackTrace();

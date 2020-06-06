@@ -1,7 +1,6 @@
 package gce.module07.model;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
@@ -11,20 +10,10 @@ import java.time.LocalDate;
  */
 @Entity
 @Table(name = "item")
-public class Item implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+public class Item {
     private Integer id;
-
-    @Column(name = "itemDescription", columnDefinition = "VARCHAR(255)")
     private String itemDescription;
-
-    @Column(name = "itemDetails", columnDefinition = "TEXT")
     private String itemDetails;
-
-    @Column(name = "itemDueDate")
     private LocalDate itemDueDate;
 
     /**
@@ -33,23 +22,9 @@ public class Item implements Serializable {
     public Item() {
     }
 
-    // Added overloading constructors for web ui
-    public Item(Integer id, String itemDescription, String itemDetails, LocalDate itemDueDate) {
-        super();
-        this.id = id;
-        this.itemDescription = itemDescription;
-        this.itemDetails = itemDetails;
-        this.itemDueDate = itemDueDate;
-    }
-
-    public Item(String itemDescription, String itemDetails, LocalDate itemDueDate) {
-        super();
-        this.itemDescription = itemDescription;
-        this.itemDetails = itemDetails;
-        this.itemDueDate = itemDueDate;
-    }
-
-    // Setters and getters
+    @Id
+    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getId() {
         return id;
     }
@@ -58,6 +33,8 @@ public class Item implements Serializable {
         this.id = id;
     }
 
+    @Basic
+    @Column(name = "itemDescription", columnDefinition = "VARCHAR(255)")
     public String getItemDescription() {
         return itemDescription;
     }
@@ -66,6 +43,8 @@ public class Item implements Serializable {
         this.itemDescription = itemDescription;
     }
 
+    @Basic
+    @Column(name = "itemDetails", length = -1, columnDefinition = "TEXT")
     public String getItemDetails() {
         return itemDetails;
     }
@@ -74,6 +53,8 @@ public class Item implements Serializable {
         this.itemDetails = itemDetails;
     }
 
+    @Basic
+    @Column(name = "itemDueDate", nullable = true)
     public LocalDate getItemDueDate() {
         return itemDueDate;
     }

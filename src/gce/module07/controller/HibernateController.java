@@ -1,63 +1,26 @@
 package gce.module07.controller;
 
 import gce.module07.model.Item;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-/**
- * Starts the hibernate session and session factory
- */
 public class HibernateController {
+    private static SessionFactory sessionFactory;
 
-    private static SessionFactory sessionFactory = null;
+    public static SessionFactory getSessionFactory() {
+        if (sessionFactory == null) {
+            // loads configuration and mappings
+            Configuration configuration = new Configuration().configure("/gce/module07/model/hibernate.cfg.xml").addAnnotatedClass(Item.class);
+            ServiceRegistry serviceRegistry
+                    = new StandardServiceRegistryBuilder()
+                    .applySettings(configuration.getProperties()).build();
 
-    // Loads the session factory automatically
-    static {
-        try {
-            loadSessionFactory();
-        } catch (Exception e) {
-            System.err.println("Exception while initializing hibernate controller.");
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Loads the session factory based on the hibernate configuration file
-     */
-    public static void loadSessionFactory() {
-        Configuration configuration = new Configuration();
-
-        // Defaults to src/hibernate.cfg.xml
-        configuration.configure("/gce/module07/model/hibernate.cfg.xml").addAnnotatedClass(Item.class);
-
-        ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
-
-        sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-    }
-
-    /**
-     * Opens and returns the hibernate session
-     *
-     * @return The opened session
-     */
-    public static Session getSession() {
-        Session session = null;
-
-        try {
-            session = sessionFactory.openSession();
-        } catch (Throwable t) {
-            System.err.println("Error opening the session.");
-
-            t.printStackTrace();
+            // builds a session factory from the service registry
+            sessionFactory = configuration.buildSessionFactory(serviceRegistry);
         }
 
-        if (session == null) {
-            System.err.println("No session exists.");
-        }
-
-        return session;
+        return sessionFactory;
     }
 }
