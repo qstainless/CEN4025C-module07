@@ -19,7 +19,7 @@ import gce.module07.model.ItemDaoImpl;
 
 @WebServlet("/")
 public class ServletController extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 127517L;
     private ItemDao itemDao;
 
     @Override
@@ -38,14 +38,12 @@ public class ServletController extends HttpServlet {
             throws ServletException, IOException {
         String action = request.getServletPath();
 
-        System.out.println(action);
-
         try {
             switch (action) {
                 case "/new":
                     newItemForm(request, response);
                     break;
-                case "/insert.jsp":
+                case "/insert":
                     insertItem(request, response);
                     break;
                 case "/delete":
@@ -62,7 +60,6 @@ public class ServletController extends HttpServlet {
 
     private void newItemForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("Clicked on new");
         RequestDispatcher dispatcher = request.getRequestDispatcher("new.jsp");
 
         dispatcher.forward(request, response);
@@ -72,8 +69,6 @@ public class ServletController extends HttpServlet {
         String itemDescription = request.getParameter("itemDescription");
         String itemDetails = request.getParameter("itemDetails");
         String itemDueDate = request.getParameter("itemDueDate");
-
-        System.out.println(itemDescription + "\n" + itemDetails + "\n" + itemDueDate);
 
         Item newItem = new Item();
         newItem.setItemDescription(itemDescription);
@@ -87,7 +82,6 @@ public class ServletController extends HttpServlet {
 
     private void deleteItem(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        System.out.println(id);
 
         itemDao.deleteItemById(id);
 
@@ -96,7 +90,6 @@ public class ServletController extends HttpServlet {
 
     private void listItem(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
-        System.out.println("Im listItem");
         List<Item> listItem = itemDao.loadAllItems();
 
         request.setAttribute("listItem", listItem);
@@ -105,27 +98,4 @@ public class ServletController extends HttpServlet {
 
         dispatcher.forward(request, response);
     }
-//    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException {
-//        String itemDescription = request.getParameter("itemDescription");
-//        String itemDetails = request.getParameter("itemDetails");
-//        String itemDueDate = request.getParameter("itemDueDate");
-//
-//        response.setContentType("text/html");
-//        PrintWriter pw = response.getWriter();
-//
-//        pw.write("got:");
-//        pw.write(itemDescription + "<br>");
-//        pw.write(itemDetails + "<br>");
-//        pw.write(itemDueDate + "<br>");
-//
-//        Item newItem = new Item();
-//        newItem.setItemDescription(itemDescription);
-//        newItem.setItemDetails(itemDetails);
-//        newItem.setItemDueDate(LocalDate.parse(itemDueDate, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-//
-//        Data.getInstance().addItem(newItem);
-//
-////        response.sendRedirect("index.jsp");
-//    }
 }
