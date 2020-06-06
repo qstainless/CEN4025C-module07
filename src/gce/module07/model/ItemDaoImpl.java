@@ -12,8 +12,8 @@ import java.util.List;
 
 public class ItemDaoImpl implements ItemDao {
 
-    Session session = null;
-    Transaction transaction = null;
+    static Session session = null;
+    static Transaction transaction = null;
 
     public ItemDaoImpl() {
     }
@@ -37,8 +37,7 @@ public class ItemDaoImpl implements ItemDao {
                     session.close();
                 }
             } catch (Exception e) {
-                System.out.println("Error closing database connection.");
-                e.printStackTrace();
+                closingError(e);
             }
         }
     }
@@ -65,8 +64,7 @@ public class ItemDaoImpl implements ItemDao {
                     session.close();
                 }
             } catch (Exception e) {
-                System.out.println("Error closing database connection.");
-                e.printStackTrace();
+                closingError(e);
             }
         }
 
@@ -92,17 +90,37 @@ public class ItemDaoImpl implements ItemDao {
                     session.close();
                 }
             } catch (Exception e) {
-                System.out.println("Error closing database connection.");
-                e.printStackTrace();
+                closingError(e);
             }
         }
     }
 
     public void deleteItemById(int itemId) {
-        Item item = session.get(Item.class, itemId);
+        Item item = new Item();
 
-        if (item != null) {
-            deleteItem(item);
+        try {
+            session = HibernateController.getSessionFactory().openSession();
+            item = session.get(Item.class, itemId);
+        } catch (Exception e) {
+            System.out.println("Error. Item not found.");
+            e.printStackTrace();
+        } finally {
+            try {
+                if (session != null) {
+                    session.close();
+                }
+            } catch (Exception e) {
+                closingError(e);
+            }
+
+            if (item != null) {
+                deleteItem(item);
+            }
         }
+    }
+
+    private void closingError(Exception e) {
+        System.out.println("Error closing database connection.");
+        e.printStackTrace();
     }
 }
