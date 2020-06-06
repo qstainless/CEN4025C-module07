@@ -76,13 +76,13 @@ section {
 }
 
 .item-id {
-    width: 50px;
+    width: 2em;
 }
 
 .item-due-date {
-    width: 200px;
+    width: 6em;
 }
 
 .item-action {
-    width: 10%;
+    width: 8em;
 }
