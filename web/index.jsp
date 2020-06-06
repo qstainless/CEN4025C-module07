@@ -23,7 +23,7 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach var="item" items="${listItems}">
+            <c:forEach var="item" items="${listItem}">
                 <tr>
                     <th scope="row"><c:out value="${item.id}"/></th>
                     <td><c:out value="${item.itemDueDate}"/></td>
