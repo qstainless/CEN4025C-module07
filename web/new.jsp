@@ -27,7 +27,7 @@
 
                         <div id="container">
 
-                            <form action="InsertItem">
+                            <form action="insert" method="post">
 
                                 <!-- Item Description -->
 
