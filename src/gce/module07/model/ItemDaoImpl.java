@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ItemDaoImpl implements ItemDao {
 
-    static Session session = null;
+    Session session = null;
     Transaction transaction = null;
 
     public ItemDaoImpl() {
@@ -43,8 +43,8 @@ public class ItemDaoImpl implements ItemDao {
         }
     }
 
-    public List loadAllItems() {
-        List itemData = null;
+    public List<Item> loadAllItems() {
+        List<Item> itemData = null;
 
         try {
             session = HibernateController.getSessionFactory().openSession();
