@@ -1,13 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 
-<%@include file="header.jsp" %>
+<%@include file="common/header.jsp" %>
 
 <body>
 
 <section>
     <div class="m-5">
-        <%@ include file="heading.jsp" %>
+        <%@ include file="common/heading.jsp" %>
 
         <button type="button" class="btn btn-success btn-sm my-2" data-toggle="modal" data-target="#newItemModal">Add
             New Item

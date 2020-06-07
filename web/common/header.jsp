@@ -10,7 +10,7 @@
           crossorigin="anonymous"/>
 
     <!-- Custom style sheet -->
-    <style> <%@include file="assets/css/module07.css" %> </style>
+    <style> <%@include file="../assets/css/module07.css" %> </style>
 
     <script src="https://kit.fontawesome.com/132bc30faa.js" crossorigin="anonymous"></script>
 

@@ -2,13 +2,13 @@
 
 <html>
 
-<%@include file="header.jsp" %>
+<%@include file="common/header.jsp" %>
 
 <body>
 
 <section>
     <div class="m-5">
-        <%@ include file="heading.jsp" %>
+        <%@ include file="common/heading.jsp" %>
 
         <div class="clearfix"></div>
 
