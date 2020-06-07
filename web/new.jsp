@@ -111,7 +111,7 @@
 
                                     <div class="col-sm-9">
                                         <button id="create" type="submit" class="btn btn-sm btn-primary">Create</button>&nbsp;
-                                        <a href="index.jsp" class="btn btn-sm btn-warning">Cancel</a>
+                                        <a href="list" class="btn btn-sm btn-warning">Cancel</a>
                                     </div> <!-- /.col -->
 
                                 </div> <!-- /.form-group -->
