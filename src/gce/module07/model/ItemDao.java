@@ -3,6 +3,9 @@ package gce.module07.model;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Interface for the Item model
+ */
 public interface ItemDao {
     void insertItem(Item item) throws SQLException;
 

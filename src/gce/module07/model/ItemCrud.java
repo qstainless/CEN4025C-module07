@@ -10,14 +10,25 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
+/**
+ * Performs database CRUD operations on the Item entity
+ */
 public class ItemCrud implements ItemDao {
 
     static Session session = null;
     static Transaction transaction = null;
 
+    /**
+     * Constructor
+     */
     public ItemCrud() {
     }
 
+    /**
+     * Inserts the passed item into the database
+     *
+     * @param item The submitted item
+     */
     @Override
     public void insertItem(Item item) {
         try {
@@ -43,6 +54,11 @@ public class ItemCrud implements ItemDao {
         }
     }
 
+    /**
+     * Loads all to-do items fromt the database
+     *
+     * @return The queried to-do items
+     */
     @Override
     public List<Item> loadAllItems() {
         List<Item> itemData = null;
@@ -58,7 +74,7 @@ public class ItemCrud implements ItemDao {
 
             itemData = allQuery.getResultList();
         } catch (Exception e) {
-            System.out.println("Error writing to database. Item not added.");
+            System.out.println("Error querying the database. No to-do items were found.");
             e.printStackTrace();
         } finally {
             try {
@@ -73,6 +89,11 @@ public class ItemCrud implements ItemDao {
         return itemData;
     }
 
+    /**
+     * Deletes the specified item from the database
+     *
+     * @param item The item to be deleted
+     */
     @Override
     public void deleteItem(Item item) {
         try {
@@ -98,6 +119,11 @@ public class ItemCrud implements ItemDao {
         }
     }
 
+    /**
+     * Deletes an item from the database by its id
+     *
+     * @param itemId The item's id in the table
+     */
     @Override
     public void deleteItemById(int itemId) {
         Item selectedItem = selectItem(itemId);
@@ -107,6 +133,12 @@ public class ItemCrud implements ItemDao {
         }
     }
 
+    /**
+     * Query the to-do item from the database by its id
+     *
+     * @param itemId The item's id
+     * @return The queried item
+     */
     @Override
     public Item selectItem(int itemId) {
         Item item = null;
@@ -130,6 +162,11 @@ public class ItemCrud implements ItemDao {
         return item;
     }
 
+    /**
+     * Updates an edited item ont he database
+     *
+     * @param item The item to be updated
+     */
     @Override
     public void updateItem(Item item) {
         try {
@@ -155,6 +192,11 @@ public class ItemCrud implements ItemDao {
         }
     }
 
+    /**
+     * DRY implementation of graceful exception handling
+     *
+     * @param e The generated exception
+     */
     private void closingError(Exception e) {
         System.out.println("Error closing database connection.");
         e.printStackTrace();
