@@ -99,7 +99,7 @@
                                                 $('#itemDueDate').datetimepicker({
                                                     format: 'YYYY-MM-DD',
                                                     ignoreReadonly: true,
-                                                    defaultDate(moment(<c:out value='${item.itemDueDate}' />))
+                                                    defaultDate: moment('<c:out value='${item.itemDueDate}' />', 'YYYY-MM-DD')
                                                 });
                                             });
                                         </script>
