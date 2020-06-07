@@ -11,4 +11,8 @@ public interface ItemDao {
     void deleteItem(Item item);
 
     void deleteItemById(int itemId);
+
+    Item selectItem(int id);
+
+    void updateItem(Item updatedItem) throws SQLException;
 }

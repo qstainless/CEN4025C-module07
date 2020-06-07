@@ -46,6 +46,12 @@ public class ServletController extends HttpServlet {
                 case "/insert":
                     insertItem(request, response);
                     break;
+                case "/edit":
+                    editItemForm(request, response);
+                    break;
+                case "/update":
+                    updateItem(request, response);
+                    break;
                 case "/delete":
                     deleteItem(request, response);
                     break;
@@ -66,6 +72,14 @@ public class ServletController extends HttpServlet {
     }
 
     private void insertItem(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+        Item newItem = processFormData(request);;
+
+        itemDao.insertItem(newItem);
+
+        response.sendRedirect("list");
+    }
+
+    private static Item processFormData(HttpServletRequest request) {
         String itemDescription = request.getParameter("itemDescription");
         String itemDetails = request.getParameter("itemDetails");
         String itemDueDate = request.getParameter("itemDueDate");
@@ -75,7 +89,28 @@ public class ServletController extends HttpServlet {
         newItem.setItemDetails(itemDetails);
         newItem.setItemDueDate(LocalDate.parse(itemDueDate, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 
-        itemDao.insertItem(newItem);
+        return newItem;
+    }
+
+    private void editItemForm(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+
+        Item selectedItem = itemDao.selectItem(id);
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("edit.jsp");
+
+        request.setAttribute("item", selectedItem);
+
+        dispatcher.forward(request, response);
+    }
+
+    private void updateItem(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+        Item updatedItem = processFormData(request);
+
+        updatedItem.setId(Integer.parseInt(request.getParameter("id")));
+
+        itemDao.updateItem(updatedItem);
 
         response.sendRedirect("list");
     }
@@ -94,7 +129,7 @@ public class ServletController extends HttpServlet {
 
         request.setAttribute("listItem", listItem);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("list.jsp");
 
         dispatcher.forward(request, response);
     }

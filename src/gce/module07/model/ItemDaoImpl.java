@@ -100,7 +100,16 @@ public class ItemDaoImpl implements ItemDao {
 
     @Override
     public void deleteItemById(int itemId) {
-        Item item = new Item();
+        Item selectedItem = selectItem(itemId);
+
+        if (selectedItem != null) {
+            deleteItem(selectedItem);
+        }
+    }
+
+    @Override
+    public Item selectItem(int itemId) {
+        Item item = null;
 
         try {
             session = HibernateController.getSessionFactory().openSession();
@@ -116,9 +125,32 @@ public class ItemDaoImpl implements ItemDao {
             } catch (Exception e) {
                 closingError(e);
             }
+        }
 
-            if (item != null) {
-                deleteItem(item);
+        return item;
+    }
+
+    @Override
+    public void updateItem(Item item) {
+        try {
+            session = HibernateController.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            session.saveOrUpdate(item);
+            transaction.commit();
+        } catch (Exception e) {
+            System.out.println("Error writing to database. Item not update.");
+            e.printStackTrace();
+
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            try {
+                if (session != null) {
+                    session.close();
+                }
+            } catch (Exception e) {
+                closingError(e);
             }
         }
     }
