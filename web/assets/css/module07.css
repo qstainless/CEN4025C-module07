@@ -53,14 +53,6 @@ h6 {
     font-size: 0.8em
 }
 
-hr {
-    border: none;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
-    padding: 1em;
-    margin-bottom: 2em
-}
-
 img {
     border: 1px solid rgba(97, 62, 5, 0.82);
     width: 100%
@@ -85,4 +77,9 @@ section {
 
 .item-action {
     width: 8em;
+}
+
+.divider {
+    color: #c9c9c9;
+    padding: 0 1em;
 }

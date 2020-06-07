@@ -88,6 +88,9 @@ public class ServletController extends HttpServlet {
             case "/update":
                 updateItem(request, response);
                 break;
+            case "/confirm":
+                confirmDeletion(request, response);
+                break;
             case "/delete":
                 deleteItem(request, response);
                 break;
@@ -126,7 +129,7 @@ public class ServletController extends HttpServlet {
 
         Item selectedItem = itemCrud.selectItem(id);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("edit.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("edit-item.jsp");
 
         request.setAttribute("item", selectedItem);
 
@@ -148,6 +151,27 @@ public class ServletController extends HttpServlet {
         itemCrud.updateItem(updatedItem);
 
         response.sendRedirect("list");
+    }
+
+    /**
+     * Requests user confirmation to delete the selected item
+     *
+     * @param request The POST request
+     * @param response The servlet's response
+     * @throws ServletException
+     * @throws IOException
+     */
+    private void confirmDeletion(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+
+        Item selectedItem = itemCrud.selectItem(id);
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("confirm-deletion.jsp");
+
+        request.setAttribute("item", selectedItem);
+
+        dispatcher.forward(request, response);
     }
 
     /**
@@ -176,11 +200,11 @@ public class ServletController extends HttpServlet {
      */
     private void listItem(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
-        List<Item> listItem = itemCrud.loadAllItems();
+        List<Item> items = itemCrud.loadAllItems();
 
-        request.setAttribute("listItem", listItem);
+        request.setAttribute("items", items);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("list.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("list-items.jsp");
 
         dispatcher.forward(request, response);
     }
