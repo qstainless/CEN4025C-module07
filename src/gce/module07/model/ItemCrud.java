@@ -10,12 +10,12 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
-public class ItemDaoImpl implements ItemDao {
+public class ItemCrud implements ItemDao {
 
     static Session session = null;
     static Transaction transaction = null;
 
-    public ItemDaoImpl() {
+    public ItemCrud() {
     }
 
     @Override

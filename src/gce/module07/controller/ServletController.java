@@ -14,17 +14,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import gce.module07.model.Item;
-import gce.module07.model.ItemDao;
-import gce.module07.model.ItemDaoImpl;
+import gce.module07.model.ItemCrud;
 
 @WebServlet("/")
 public class ServletController extends HttpServlet {
     private static final long serialVersionUID = 127517L;
-    private ItemDao itemDao;
+    private ItemCrud itemCrud;
 
     @Override
     public void init() {
-        itemDao = new ItemDaoImpl();
+        itemCrud = new ItemCrud();
     }
 
     @Override
@@ -74,7 +73,7 @@ public class ServletController extends HttpServlet {
     private void insertItem(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
         Item newItem = processFormData(request);;
 
-        itemDao.insertItem(newItem);
+        itemCrud.insertItem(newItem);
 
         response.sendRedirect("list");
     }
@@ -96,7 +95,7 @@ public class ServletController extends HttpServlet {
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
 
-        Item selectedItem = itemDao.selectItem(id);
+        Item selectedItem = itemCrud.selectItem(id);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("edit.jsp");
 
@@ -110,7 +109,7 @@ public class ServletController extends HttpServlet {
 
         updatedItem.setId(Integer.parseInt(request.getParameter("id")));
 
-        itemDao.updateItem(updatedItem);
+        itemCrud.updateItem(updatedItem);
 
         response.sendRedirect("list");
     }
@@ -118,14 +117,14 @@ public class ServletController extends HttpServlet {
     private void deleteItem(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
 
-        itemDao.deleteItemById(id);
+        itemCrud.deleteItemById(id);
 
         response.sendRedirect("list");
     }
 
     private void listItem(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
-        List<Item> listItem = itemDao.loadAllItems();
+        List<Item> listItem = itemCrud.loadAllItems();
 
         request.setAttribute("listItem", listItem);
 
