@@ -18,6 +18,7 @@ public class ItemDaoImpl implements ItemDao {
     public ItemDaoImpl() {
     }
 
+    @Override
     public void insertItem(Item item) {
         try {
             session = HibernateController.getSessionFactory().openSession();
@@ -42,6 +43,7 @@ public class ItemDaoImpl implements ItemDao {
         }
     }
 
+    @Override
     public List<Item> loadAllItems() {
         List<Item> itemData = null;
 
@@ -71,6 +73,7 @@ public class ItemDaoImpl implements ItemDao {
         return itemData;
     }
 
+    @Override
     public void deleteItem(Item item) {
         try {
             session = HibernateController.getSessionFactory().openSession();
@@ -95,6 +98,7 @@ public class ItemDaoImpl implements ItemDao {
         }
     }
 
+    @Override
     public void deleteItemById(int itemId) {
         Item item = new Item();
 
