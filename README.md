@@ -44,7 +44,7 @@ Clone the repo and import it into your favorite Java IDE. Make sure that:
  3. The latest version of Tomcat is installed in your system.
 
 ## Known Issues
-This application was developed using the IntelliJ IDEA Ultimate IDE. When generating the WAR exploded artifact for deployment, not all dependencies were included. There are two ways to solve this issue. The first requires copying the required dependencies to the Tomcat/lib folder. The second relies on adding the required dependencies to the WEB-INF/lib folder. The second option is preferred, as the dependencies will stay with the project, as opposed to having them existing in a specific system, limiting its portability. Files located in lib folders are not typically included in version control systems. This project will follow that guideline, but the following files are required for the application to run with Tomcat:
+This application was developed using the IntelliJ IDEA Ultimate IDE. When generating the WAR exploded artifact for deployment, not all dependencies were included by the IDE. There are two ways to solve this issue. The first requires copying the required dependencies to the Tomcat/lib folder. The second relies on adding the required dependencies to the WEB-INF/lib folder. I prefer the second option, as the dependencies will stay with the project as opposed to having them in folders outside the project structure, limiting its portability. Files located in lib folders are not typically included in version control systems. This project will follow that guideline, but note that the following files are required for the application to run with Tomcat:
 
 ```
 antlr-2.7.7.jar
