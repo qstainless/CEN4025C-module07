@@ -20,6 +20,19 @@ public class ServletController extends HttpServlet {
     private static final long serialVersionUID = 127517L;
     private ItemCrud itemCrud;
 
+    private static Item processFormData(HttpServletRequest request) {
+        String itemDescription = request.getParameter("itemDescription");
+        String itemDetails = request.getParameter("itemDetails");
+        String itemDueDate = request.getParameter("itemDueDate");
+
+        Item submittedItem = new Item();
+        submittedItem.setItemDescription(itemDescription);
+        submittedItem.setItemDetails(itemDetails);
+        submittedItem.setItemDueDate(LocalDate.parse(itemDueDate, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+
+        return submittedItem;
+    }
+
     @Override
     public void init() {
         itemCrud = new ItemCrud();
@@ -70,24 +83,11 @@ public class ServletController extends HttpServlet {
     }
 
     private void insertItem(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
-        Item newItem = processFormData(request);;
+        Item newItem = processFormData(request);
 
         itemCrud.insertItem(newItem);
 
         response.sendRedirect("list");
-    }
-
-    private static Item processFormData(HttpServletRequest request) {
-        String itemDescription = request.getParameter("itemDescription");
-        String itemDetails = request.getParameter("itemDetails");
-        String itemDueDate = request.getParameter("itemDueDate");
-
-        Item newItem = new Item();
-        newItem.setItemDescription(itemDescription);
-        newItem.setItemDetails(itemDetails);
-        newItem.setItemDueDate(LocalDate.parse(itemDueDate, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-
-        return newItem;
     }
 
     private void editItemForm(HttpServletRequest request, HttpServletResponse response)
