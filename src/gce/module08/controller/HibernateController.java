@@ -27,12 +27,4 @@ public class HibernateController {
 
         return sessionFactory;
     }
-
-    public static Session getHibernateSession() {
-
-        final SessionFactory sf = new Configuration()
-                .configure("/gce/module08/model/hibernate.cfg.xml").buildSessionFactory();
-
-        return sf.openSession();
-    }
 }
