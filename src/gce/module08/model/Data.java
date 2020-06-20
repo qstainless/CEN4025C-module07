@@ -1,4 +1,4 @@
-package gce.module07.model;
+package gce.module08.model;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -38,7 +38,7 @@ public class Data {
         try {
             itemCrud.insertItem(item);
         } catch (Exception e) {
-            System.out.println("Error deleting from database. Item not deleted.");
+            System.out.println("Data: Error deleting from database. Item not deleted.");
             e.printStackTrace();
         } finally {
             // Add item to Data model if successfully deleted from the database
@@ -71,7 +71,7 @@ public class Data {
         try {
             itemCrud.deleteItem(item);
         } catch (Exception e) {
-            System.out.println("Error deleting from database. Item not deleted.");
+            System.out.println("Data: Error deleting from database. Item not deleted.");
             e.printStackTrace();
         } finally {
             // Remove item from Data model if successfully deleted from the database

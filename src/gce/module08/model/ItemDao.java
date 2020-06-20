@@ -1,4 +1,4 @@
-package gce.module07.model;
+package gce.module08.model;
 
 import java.sql.SQLException;
 import java.util.List;

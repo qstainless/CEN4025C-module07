@@ -1,6 +1,7 @@
-package gce.module07.controller;
+package gce.module08.controller;
 
-import gce.module07.model.Item;
+import gce.module08.model.Item;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -15,7 +16,7 @@ public class HibernateController {
     public static SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
             // Loads configuration file and model mapping
-            Configuration configuration = new Configuration().configure("/gce/module07/model/hibernate.cfg.xml").addAnnotatedClass(Item.class);
+            Configuration configuration = new Configuration().configure("/gce/module08/model/hibernate.cfg.xml").addAnnotatedClass(Item.class);
             ServiceRegistry serviceRegistry
                     = new StandardServiceRegistryBuilder()
                     .applySettings(configuration.getProperties()).build();
@@ -25,5 +26,13 @@ public class HibernateController {
         }
 
         return sessionFactory;
+    }
+
+    public static Session getHibernateSession() {
+
+        final SessionFactory sf = new Configuration()
+                .configure("/gce/module08/model/hibernate.cfg.xml").buildSessionFactory();
+
+        return sf.openSession();
     }
 }

@@ -33,17 +33,17 @@
         </property>
 
         <property name="show_sql">
-            true
+            false
         </property>
 
         <property name="format_sql">
-            true
+            false
         </property>
 
         <property name="hbm2ddl.auto">
             update
         </property>
 
-        <mapping class="gce.module07.model.Item"/>
+        <mapping class="gce.module08.model.Item"/>
     </session-factory>
 </hibernate-configuration>

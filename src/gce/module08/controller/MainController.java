@@ -1,7 +1,7 @@
-package gce.module07.controller;
+package gce.module08.controller;
 
-import gce.module07.model.Data;
-import gce.module07.model.Item;
+import gce.module08.model.Data;
+import gce.module08.model.Item;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;

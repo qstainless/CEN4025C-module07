@@ -1,7 +1,7 @@
-package gce.module07.controller;
+package gce.module08.controller;
 
-import gce.module07.model.Item;
-import gce.module07.model.ItemCrud;
+import gce.module08.model.Item;
+import gce.module08.model.ItemCrud;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -52,7 +52,7 @@ public class ServletController extends HttpServlet {
     /**
      * Processes the POST data
      *
-     * @param request The POST request
+     * @param request  The POST request
      * @param response The servlet's response
      * @throws ServletException
      * @throws IOException
@@ -67,7 +67,7 @@ public class ServletController extends HttpServlet {
      * Processes the POST action to make the method calls required for CRUD
      * operations on the Item entity
      *
-     * @param request The POST request
+     * @param request  The POST request
      * @param response The servlet's response
      * @throws ServletException
      * @throws IOException
@@ -102,7 +102,7 @@ public class ServletController extends HttpServlet {
     /**
      * Calls for insertion of the submitted item into the database
      *
-     * @param request The POST request
+     * @param request  The POST request
      * @param response The servlet's response
      * @throws IOException
      */
@@ -111,13 +111,18 @@ public class ServletController extends HttpServlet {
 
         itemCrud.insertItem(newItem);
 
+        System.out.println("Inserting: " + newItem.getItemDescription()
+                + " / " + newItem.getItemDetails()
+                + " / " + newItem.getItemDueDate() + "\n"
+        );
+
         response.sendRedirect("list");
     }
 
     /**
      * Calls the item edit form to be displayed in the web UI
      *
-     * @param request The POST request
+     * @param request  The POST request
      * @param response The servlet's response
      * @throws ServletException
      * @throws IOException
@@ -138,7 +143,7 @@ public class ServletController extends HttpServlet {
     /**
      * Calls for an update of the edited item in the database
      *
-     * @param request The POST request
+     * @param request  The POST request
      * @param response The servlet's response
      * @throws IOException
      */
@@ -155,7 +160,7 @@ public class ServletController extends HttpServlet {
     /**
      * Requests user confirmation to delete the selected item
      *
-     * @param request The POST request
+     * @param request  The POST request
      * @param response The servlet's response
      * @throws ServletException
      * @throws IOException
@@ -176,12 +181,14 @@ public class ServletController extends HttpServlet {
     /**
      * Calls for deletion of the selected item on the database
      *
-     * @param request The POST request
+     * @param request  The POST request
      * @param response The servlet's response
      * @throws IOException
      */
     private void deleteItem(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int id = Integer.parseInt(request.getParameter("id"));
+
+        System.out.println("Deleting: Item id " + id + " => " + itemCrud.selectItem(id).getItemDescription() + "\n");
 
         itemCrud.deleteItemById(id);
 
@@ -192,7 +199,7 @@ public class ServletController extends HttpServlet {
      * Queries the items in the database and calls for the items to be
      * displayed in the web UI
      *
-     * @param request The POST request
+     * @param request  The POST request
      * @param response The servlet's response
      * @throws IOException
      * @throws ServletException

@@ -1,6 +1,6 @@
-package gce.module07.model;
+package gce.module08.model;
 
-import gce.module07.controller.HibernateController;
+import gce.module08.controller.HibernateController;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -37,8 +37,8 @@ public class ItemCrud implements ItemDao {
             session.save(item);
             transaction.commit();
         } catch (Exception e) {
-            System.out.println("Error writing to database. Item not added.");
-            e.printStackTrace();
+            System.out.println("Crud error writing to database. Item not added.");
+//            e.printStackTrace();
 
             if (transaction != null) {
                 transaction.rollback();
@@ -74,8 +74,8 @@ public class ItemCrud implements ItemDao {
 
             itemData = allQuery.getResultList();
         } catch (Exception e) {
-            System.out.println("Error querying the database. No to-do items were found.");
-            e.printStackTrace();
+            System.out.println("Crud error querying the database. No to-do items were found.");
+//            e.printStackTrace();
         } finally {
             try {
                 if (session != null) {
@@ -102,8 +102,8 @@ public class ItemCrud implements ItemDao {
             session.delete(item);
             transaction.commit();
         } catch (Exception e) {
-            System.out.println("Error deleting from database. Item not deleted.");
-            e.printStackTrace();
+            System.out.println("Crud error deleting from database. Item not deleted.");
+//            e.printStackTrace();
 
             if (transaction != null) {
                 transaction.rollback();
@@ -147,8 +147,8 @@ public class ItemCrud implements ItemDao {
             session = HibernateController.getSessionFactory().openSession();
             item = session.get(Item.class, itemId);
         } catch (Exception e) {
-            System.out.println("Error. Item not found.");
-            e.printStackTrace();
+            System.out.println("Crud Error. Item " + itemId + " not found.");
+//            e.printStackTrace();
         } finally {
             try {
                 if (session != null) {
@@ -175,8 +175,8 @@ public class ItemCrud implements ItemDao {
             session.saveOrUpdate(item);
             transaction.commit();
         } catch (Exception e) {
-            System.out.println("Error writing to database. Item not update.");
-            e.printStackTrace();
+            System.out.println("Crud error writing to database. Item not updated.");
+//            e.printStackTrace();
 
             if (transaction != null) {
                 transaction.rollback();
@@ -198,7 +198,7 @@ public class ItemCrud implements ItemDao {
      * @param e The generated exception
      */
     private void closingError(Exception e) {
-        System.out.println("Error closing database connection.");
-        e.printStackTrace();
+        System.out.println("Crud error closing database connection.\n" + e);
+//        e.printStackTrace();
     }
 }
