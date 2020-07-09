@@ -24,8 +24,8 @@ public class ServletController extends HttpServlet {
 
     // Using unsafe SQl queries for Module 11 Assignment
     // Uncomment and delete the following after submission
-    // private ItemCrud itemCrud; // uncomment
-    private UnsafeItemCrud itemCrud; // delete
+     private ItemCrud itemCrud; // uncomment
+//    private UnsafeItemCrud itemCrud; // delete
 
     /**
      * Creates an item from the form data submitted by the user
@@ -53,8 +53,8 @@ public class ServletController extends HttpServlet {
     public void init() {
         // Using unsafe SQl queries for Module 11 Assignment
         // Uncomment and delete the following after submission
-        // itemCrud = new ItemCrud(); // uncomment
-        itemCrud = new UnsafeItemCrud(); // delete
+         itemCrud = new ItemCrud(); // uncomment
+//        itemCrud = new UnsafeItemCrud(); // delete
     }
 
     /**

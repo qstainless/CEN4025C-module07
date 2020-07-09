@@ -1,7 +1,7 @@
 <head>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-    <title>Castaneda - Module 11</title>
+    <title>Castaneda - Module 12</title>
 
     <!-- Using Bootstrap 4.3.1 -->
     <link rel="stylesheet"
