@@ -2,6 +2,7 @@ package gce.module08.controller;
 
 import gce.module08.model.Item;
 import gce.module08.model.ItemCrud;
+import gce.module08.model.UnsafeItemCrud;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,7 +21,11 @@ import java.util.List;
 @WebServlet("/")
 public class ServletController extends HttpServlet {
     private static final long serialVersionUID = 127517L;
-    private ItemCrud itemCrud;
+
+    // Using unsafe SQl queries for Module 11 Assignment
+    // Uncomment and delete the following after submission
+    // private ItemCrud itemCrud; // uncomment
+    private UnsafeItemCrud itemCrud; // delete
 
     /**
      * Creates an item from the form data submitted by the user
@@ -46,7 +51,10 @@ public class ServletController extends HttpServlet {
      */
     @Override
     public void init() {
-        itemCrud = new ItemCrud();
+        // Using unsafe SQl queries for Module 11 Assignment
+        // Uncomment and delete the following after submission
+        // itemCrud = new ItemCrud(); // uncomment
+        itemCrud = new UnsafeItemCrud(); // delete
     }
 
     /**
